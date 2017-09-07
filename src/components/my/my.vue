@@ -143,7 +143,7 @@
   border-top: 1px solid #e2e2e2 ;
   padding-left: 0.6rem;
   background: #fff;
-  margin-top: 1rem;
+  margin-top: 0.4rem;
 
 }
 .myumo li{
@@ -172,10 +172,10 @@
   line-height: 1.3rem;
   padding-left: 0.6rem;
   box-sizing: border-box;
-  position: fixed;
-  bottom:2rem;
+  position: relative;
   border-bottom: 1px solid #e2e2e2;
   border-top: 1px solid #e2e2e2;
+  margin-top: 1rem;
 }
 .myset img{
   position: absolute;

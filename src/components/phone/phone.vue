@@ -14,25 +14,25 @@
         <div class="pboxhead">
           <span v-if="!phone">拨打固话需要加区号</span>
           <span class="numphone">{{phone}}</span>
-          <div class="debtn"  @touchend="denum">
+          <div class="debtn"  @touchstart="denum">
             <img src="../../assets/img/debg.png" alt="" class="pbg1">
             <img src="../../assets/img/debg2.png" alt="" class="pbg2">
           </div>
 
         </div>
         <ul class="pboxm">
-          <li data="1" @touchend="getnum">1</li>
-          <li data="2" @touchend="getnum">2 <span data="2">A B C</span></li>
-          <li data="3" @touchend="getnum">3<span data="3">D E F</span></li>
-          <li data="4" @touchend="getnum">4<span data="4">G H I</span></li>
-          <li data="5" @touchend="getnum">5<span data="5">J K L</span></li>
-          <li data="6" @touchend="getnum">6<span data="6">M N O</span></li>
-          <li data="7" @touchend="getnum">7<span data="7">P Q R S</span></li>
-          <li data="8" @touchend="getnum">8<span data="8">T U V</span></li>
-          <li data="9" @touchend="getnum">9<span data="9">W X Y Z</span></li>
-          <li data="*" @touchend="getnum">*</li>
-          <li data="0" @touchend="getnum" >0<span data="0">+</span></li>
-          <li data="#" @touchend="getnum">#</li>
+          <li data="1" @touchstart="getnum">1</li>
+          <li data="2" @touchstart="getnum">2 <span data="2">A B C</span></li>
+          <li data="3" @touchstart="getnum">3<span data="3">D E F</span></li>
+          <li data="4" @touchstart="getnum">4<span data="4">G H I</span></li>
+          <li data="5" @touchstart="getnum">5<span data="5">J K L</span></li>
+          <li data="6" @touchstart="getnum">6<span data="6">M N O</span></li>
+          <li data="7" @touchstart="getnum">7<span data="7">P Q R S</span></li>
+          <li data="8" @touchstart="getnum">8<span data="8">T U V</span></li>
+          <li data="9" @touchstart="getnum">9<span data="9">W X Y Z</span></li>
+          <li data="*" @touchstart="getnum">*</li>
+          <li data="0" @touchstart="getnum" >0<span data="0">+</span></li>
+          <li data="#" @touchstart="getnum">#</li>
         </ul>
       <div class="callbox">
         <div class="core">

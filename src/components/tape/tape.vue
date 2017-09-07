@@ -4,13 +4,13 @@
         <img src="../../assets/img/img_zwth.png" alt="">
       </div>
     <ul class="tapem">
-      <li v-for="(item ,index) in tapedata">
+      <li v-for="(item ,index) in tapedata" @click="gotdetali(item,index)">
         <img src="../../assets/img/smphone.png" alt="" class="taimg1">
         <p>拨打 {{item.callee }} 的录音</p>
         <p>时长：{{item.real_call_minute}}</p>
         <p>{{item.create_time | timefilter }}</p>
         <div class="isintape" v-if="item.voice_record_status==0">处理中</div>
-        <img src="../../assets/img/more.png" alt="" class="taimg2" v-if="item.voice_record_status==1" @click="gotdetali(item,index)">
+        <img src="../../assets/img/more.png" alt="" class="taimg2" v-if="item.voice_record_status==1" >
       </li>
     </ul>
   </div>
