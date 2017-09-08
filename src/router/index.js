@@ -134,10 +134,12 @@ let router = new Router({
   ]
 })
 router.beforeEach((to,from,next)=>{
+  alert(to.path)
   document.title = to.meta.title?to.meta.title:'通话录音';
   let islogin = to.meta.login;
   let isloginxh = Vue.prototype.$local.fetch('xhtapelogin').mobile;
   if(islogin && !isloginxh){ //表示还没有登录
+    alert(to.path)
     next({path:'/login',query:{key:to.path.replace('/','')}})
   }else{
     next()
