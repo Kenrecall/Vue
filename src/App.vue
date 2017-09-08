@@ -13,13 +13,10 @@ export default {
     if(keys){
       let key = this.$route.redirectedFrom.split('=')[1];
       console.log(key)
-      alert(key)
       if(key){
         this.$router.push('/'+key)
       }
     }
-
-
 
 
   }

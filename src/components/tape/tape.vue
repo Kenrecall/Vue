@@ -51,7 +51,7 @@
       }
     },
     created(){
-        this.$store.dispatch('getdatas',{page:1})
+      this.$store.dispatch('getdatas',{page:1})
     }
 
   }

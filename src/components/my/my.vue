@@ -20,15 +20,11 @@
         <img src="../../assets/img/more.png" alt="">
       </router-link>
     </ul>
-    <ul class="myumo">
+    <ul class="myumo1">
       <router-link to="/problem" tag="li">
         <span>常见问题</span>
         <img src="../../assets/img/more.png" alt="">
       </router-link>
-      <li @click="server">
-        <span>在线客服</span>
-        <img src="../../assets/img/more.png" alt="">
-      </li>
     </ul>
     <router-link to="/set" tag="div" class="myset">
       <span>设置</span>
@@ -38,6 +34,7 @@
 </template>
 
 <script>
+  import {myalertpTwo} from '../../until/toolfn'
   import HTTP from '../../until/http'
   export default {
       name: '',
@@ -80,6 +77,7 @@
           };
           HTTP.post('',moneydata)
             .then((res)=>{
+              console.log('再次请求余额');
               if(res.data.status ==1){
                 this.userdata =res.data.data;
               }else {
@@ -91,12 +89,14 @@
               console.log(errr)
             });
         },
-        server(){
-          _MEIQIA('showPanel')
-        }
+//        server(){
+//
+//          _MEIQIA('showPanel')
+//        }
       },
       created(){
-        _MEIQIA('init'); // 在线客服
+//        _MEIQIA('init'); // 在线客服
+//        myalertpTwo('app',false,window.location.href);
         this.mymoney();
       }
     }
@@ -165,6 +165,33 @@
   padding:0.3rem 0.3rem;
 
 }
+.myumo1{
+  height: 1.3rem;
+  border-bottom: 1px solid #e2e2e2 ;
+  border-top: 1px solid #e2e2e2 ;
+  padding-left: 0.6rem;
+  background: #fff;
+  margin-top: 0.4rem;
+
+}
+.myumo1 li{
+  height: 1.3rem;
+  background: #fff;
+  line-height: 1.3rem;
+  box-sizing: border-box;
+  position: relative;
+}
+.myumo1 li img{
+  position: absolute;
+  width: 0.6rem;
+  height: 0.6rem;
+  top:0;
+  right: 0.1rem;
+  padding:0.3rem 0.3rem;
+
+}
+
+
 .myset{
   width: 100%;
   height: 1.3rem;

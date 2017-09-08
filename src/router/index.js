@@ -22,7 +22,7 @@ import login from '@/login/login'
 import reg from '@/login/reg'
 
 Vue.use(Router)
-
+import {myalertpTwo} from '../until/toolfn.js'
 let router = new Router({
   mode:'history',
   linkActiveClass:'is_active',
@@ -134,16 +134,33 @@ let router = new Router({
   ]
 })
 router.beforeEach((to,from,next)=>{
-  alert(to.path)
   document.title = to.meta.title?to.meta.title:'通话录音';
-  let islogin = to.meta.login;
-  let isloginxh = Vue.prototype.$local.fetch('xhtapelogin').mobile;
-  if(islogin && !isloginxh){ //表示还没有登录
-    alert(to.path)
-    next({path:'/login',query:{key:to.path.replace('/','')}})
-  }else{
-    next()
-  }
+  // console.log(to.redirectedFrom)
+  // console.log(to)
+  // let keys =to.redirectedFrom;
+  // let key ='';
+  // if(keys){
+  //     key= keys.split('=')[1]
+  // };
+  // if(keys && key){
+  //     // myalertpTwo('app',false,'重定向'+ key);
+  //     next('/'+key)
+  //
+  //
+  // }else
+
+    // myalertpTwo('app',false,'没有重定向直接跳转的地址'+ to.path);
+    let islogin = to.meta.login;
+    let isloginxh = Vue.prototype.$local.fetch('xhtapelogin').mobile;
+    document.title = to.meta.title?to.meta.title:'通话录音';
+    if(islogin && !isloginxh){ //表示还没有登录
+      next({path:'/login',query:{key:to.path.replace('/','')}})
+    }else{
+      next()
+    }
+
+
+
 
 
 })

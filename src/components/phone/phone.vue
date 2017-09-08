@@ -201,7 +201,7 @@
         let  myknow =this.$local.fetch('xhisknow'); //存储本地 我知道了 状态
         console.log(myknow)
         if(myknow.isknow){
-//          this.mycall();
+          this.mycall();
         }else {
           this.isknow =true;
         }
