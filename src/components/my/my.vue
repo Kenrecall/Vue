@@ -92,11 +92,11 @@
             });
         },
         server(){
-//          _MEIQIA('showPanel')
+          _MEIQIA('showPanel')
         }
       },
       created(){
-//        _MEIQIA('init'); // 在线客服
+        _MEIQIA('init'); // 在线客服
         this.mymoney();
       }
     }
