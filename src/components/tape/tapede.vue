@@ -623,7 +623,7 @@ textarea{
     left: 0;
     -webkit-box-pack: center;
     -webkit-box-align: center;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 668;
     overflow: hidden;
     font-size: 0.4rem;
