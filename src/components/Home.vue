@@ -2,15 +2,15 @@
   <div class="">
     <router-view></router-view>
     <ul class="ta_tab">
-      <router-link :to="{path:'/phone'}" tag="li" exact event="touchstart">
+      <router-link :to="{path:'/phone'}" tag="li" exact event="touchstart" replace>
         <img :src="imgurl.img1" alt="">
         <!--<span>通话</span>-->
       </router-link>
-      <router-link :to="{path:'/tape'}" tag="li" exact event="touchstart">
+      <router-link :to="{path:'/tape'}" tag="li" exact event="touchstart" replace>
         <img :src="imgurl.img2" alt="">
         <!--<span>我的录音</span>-->
       </router-link>
-      <router-link :to="{path:'/my'}" tag="li" exact event="touchstart">
+      <router-link :to="{path:'/my'}" tag="li" exact event="touchstart" replace>
         <img :src="imgurl.img3" alt="">
         <!--<span>用户中心</span>-->
       </router-link>

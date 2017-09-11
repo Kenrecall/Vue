@@ -41,7 +41,7 @@
             "jpushId ": "AkxiCETBhk6vxzyIfrIvDfJhPZbu4wqMYi9z3WQ8KELF",
             "deviceToken ": "",
             "cellnet": "1.0.1",
-            "sysver": this.$local.fetch('xhsysver'),
+            "sysver": this.$local.fetch('xhsysver').sysver,
             "clientname ": " iPhone8,1 ",
             "versionCode": "101",
             "platform": "h5",

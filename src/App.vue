@@ -20,7 +20,11 @@ export default {
       }else {
         sysver = key;
       }
-      this.$local.save('xhsysver',sysver);
+      let xhsysver =this.$local.fetch('xhsysver');
+      console.log(xhsysver.sysver)
+      if(!xhsysver){
+        this.$local.save('xhsysver',{sysver:sysver});
+      }
       console.log(sysver)
       console.log(key)
       if(key){

@@ -29,10 +29,10 @@
       },
     methods:{
       goreg(){
-          this.$router.push('/reg')
+          this.$router.replace('/reg')
       },
       forreg(){
-        this.$router.push({path:'/reg',query:{title:2}})
+        this.$router.replace({path:'/reg',query:{title:2}})
       },
       gologin(){
 
@@ -66,7 +66,7 @@
             "jpushId ": "AkxiCETBhk6vxzyIfrIvDfJhPZbu4wqMYi9z3WQ8KELF",
             "deviceToken ": "",
             "cellnet": "1.0.1",
-            "sysver": this.$local.fetch('xhsysver'),
+            "sysver": this.$local.fetch('xhsysver').sysver,
             "clientname ": " iPhone8,1 ",
             "versionCode": "101",
             "platform": "h5",
@@ -84,19 +84,16 @@
             if(res.data.status ==1){
               let loca= res.data.data;
               this.$local.save('xhtapelogin',loca); //存储本地登录状态
-//              this.$store.commit('pulllogin',res.data.data);
               let key = this.$route.query.key ? this.$route.query.key :'';
               console.log(key);
-              this.$router.push('./'+key)
+              this.$router.replace('./'+key)
             }else {
               this.errmsg =res.data.msg;
             }
-
           })
           .catch((err)=>{
-
+            alert('错误信息返回')
           })
-
       }
     }
   }
