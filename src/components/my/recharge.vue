@@ -121,14 +121,12 @@
             .then((res)=>{
               console.log(res.data)
               if(res.data.status ==1){
-                let  oid =res.data.data.ordercode;
+//                let  oid =res.data.data.ordercode;
 //                this.gopayy(key,oid)
                 if(key ==1){
                    window.location.href=res.data.data.yicardPayUrl;
-//                   window.location.replace(res.data.data.yicardPayUrl);
                 }else {
                    window.location.href=res.data.data.yicardPayUrl_Alipay;
-//                 window.location.replace(res.data.data.yicardPayUrl_Alipay);
                 }
               }else {
                 myalertpTwo('recharge',false,res.data.msg,()=>{

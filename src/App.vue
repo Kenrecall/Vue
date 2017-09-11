@@ -11,14 +11,13 @@ export default {
     console.log(this.$route.redirectedFrom)
     let keys =this.$route.redirectedFrom;
     if(keys){
-      let key = this.$route.redirectedFrom.split('=')[1];
+      let urlarr = this.$route.redirectedFrom.split('=');
+      let key = urlarr[urlarr.length-1];
       console.log(key)
       if(key){
         this.$router.push('/'+key)
       }
     }
-
-
   }
 }
 </script>
