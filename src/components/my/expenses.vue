@@ -1,12 +1,12 @@
 <template>
   <div class="myexp">
-    <ul v-if="lists">
+    <ul  v-if="istape">
       <li class="myexpli" v-for="item in lists">
         <p><span>呼叫号码：{{item.callee}}</span><span>{{ item.cost_money}}元</span></p>
         <p><span>{{ item.create_time | timefilter }}</span><span>通话时长：{{item.real_call_minute}}</span></p>
       </li>
-
     </ul>
+    <p v-if="!istape" class="expen_p">暂无历史账单~~</p>
   </div>
 </template>
 
@@ -18,7 +18,7 @@
     data () {
       return {
         msg: '',
-        istape:''
+        istape:false
       }
   },
     methods:{
@@ -32,7 +32,7 @@
     computed:{
       lists(){
         let  da = this.$store.state.dedata;
-        if(da && da.length == 0){
+        if(da && da.length != 0){
           this.istape = true
         }else {
           this.istape = false;
@@ -95,5 +95,8 @@
     font-size:13px;
     color:#666666;
   }
-
+.expen_p{
+  font-size: 0.35rem;
+  line-height: 3rem;
+}
 </style>

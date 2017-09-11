@@ -28,11 +28,13 @@
           }
       },
     methods:{
-      goreg(){
-          this.$router.replace('/reg')
+      goreg(){ //注册
+          let key = this.$route.query.key ? this.$route.query.key :'';
+          this.$router.replace({path:'/reg',query:{title:1,key:key}})
       },
-      forreg(){
-        this.$router.replace({path:'/reg',query:{title:2}})
+      forreg(){ //忘记密码
+        let key = this.$route.query.key ? this.$route.query.key :'';
+        this.$router.replace({path:'/reg',query:{title:2,key:key}})
       },
       gologin(){
 

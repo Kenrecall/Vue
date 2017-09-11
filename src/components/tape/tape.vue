@@ -1,9 +1,9 @@
 <template>
   <div class="tape">
-      <div class="ontape" v-if="istape">
+      <div class="ontape" v-if="!istape">
         <img src="../../assets/img/img_zwth.png" alt="">
       </div>
-    <ul class="tapem">
+    <ul class="tapem" v-if="istape">
       <li v-for="(item ,index) in tapedata" @click="gotdetali(item,index)">
         <img src="../../assets/img/smphone.png" alt="" class="taimg1">
         <p>拨打 {{item.callee }} 的录音</p>
@@ -41,12 +41,13 @@
     computed:{
       tapedata(){
         let  da = this.$store.state.dedata;
-        if(da && da.length == 0){
+        if(da && da.length != 0){
           this.istape = true
         }else {
           this.istape = false;
         }
-
+        console.log(this.istape)
+        console.log(da)
         return  da;
       }
     },
@@ -65,7 +66,6 @@
 
 }
 .ontape{
-  height: 100vh;
   width: 100%;
   background:#f1f1f1;
 }

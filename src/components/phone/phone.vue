@@ -1,9 +1,9 @@
 <template>
   <div class="myphone" id="myphone">
     <div class="no_phone" >
-      <p class="noph"  v-if="!alldatas">为保证通话、录音数据正常使用，请确保余额充足，拨打国际电话请先添加国家编号</p>
-      <ul class="alltapes">
-        <li v-if="alldatas" v-for="item in alldatas" @click="headcall(item.callee)">
+      <p class="noph"  v-if="alldatas.length == 0">为保证通话、录音数据正常使用，请确保余额充足，拨打国际电话请先添加国家编号</p>
+      <ul class="alltapes" v-if="alldatas.length != 0">
+        <li  v-for="item in alldatas" @click="headcall(item.callee)">
           <img src="../../assets/img/sp_bg.png" alt="" class="">
           <span>{{item.callee}}</span>
           <span>{{item.create_time | timefilter }}</span>
@@ -319,6 +319,7 @@
             console.log(res.data)
             if(res.data.status ==1){
                 this.alldatas =res.data.data;
+              console.log(this.alldatas)
             }else {
               // 账户 异地登录
               myalertpTwo('myphone',false,res.data.msg,()=>{
