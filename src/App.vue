@@ -12,7 +12,16 @@ export default {
     let keys =this.$route.redirectedFrom;
     if(keys){
       let urlarr = this.$route.redirectedFrom.split('=');
+      console.log(urlarr);
       let key = urlarr[urlarr.length-1];
+      let sysver='';
+      if(urlarr.length>2){
+        sysver =urlarr[1].split('&')[0]
+      }else {
+        sysver = key;
+      }
+      this.$local.save('xhsysver',sysver);
+      console.log(sysver)
       console.log(key)
       if(key){
         this.$router.push('/'+key)
