@@ -22,7 +22,7 @@ export default {
       }
       let xhsysver =this.$local.fetch('xhsysver');
       console.log(xhsysver.sysver)
-      if(!xhsysver){
+      if(!xhsysver.sysver){
         this.$local.save('xhsysver',{sysver:sysver});
       }
       console.log(sysver)

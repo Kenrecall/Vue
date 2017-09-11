@@ -149,12 +149,12 @@
               console.log(res.data)
               if(res.data.status ==1){
                 console.log('找回密码成功')
-//                if(this.title ==2){ // 这里 可以 让 修改密码成功后 自动登录
-//
-//                }else{
-//
-//                }
-                this.$router.push('./login')
+
+                let loca= res.data.data;
+                this.$local.save('xhtapelogin',loca); //存储本地登录状态
+                let key = this.$route.query.key ? this.$route.query.key :'';
+                console.log(key);
+                this.$router.replace('./'+key)
               }else {
                 this.errmsg =res.data.msg;
               }
@@ -172,7 +172,12 @@
               console.log(res.data)
               if(res.data.status ==1){
 
-                this.$router.push('./login')
+                let loca= res.data.data;
+                this.$local.save('xhtapelogin',loca); //存储本地登录状态
+                let key = this.$route.query.key ? this.$route.query.key :'';
+                console.log(key);
+                this.$router.replace('./'+key)
+
               }else {
                 this.errmsg =res.data.msg;
               }
