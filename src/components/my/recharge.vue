@@ -1,5 +1,6 @@
 <template>
   <div class="recharge" v-if="datap" id="recharge">
+    <Goback title="充值中心"></Goback>
     <div class="getlobox">
       <ul class="clearfix">
         <li v-for="(item ,index) in datap " @touchend="chosep(item,index)" :class="{activeli:defauindex==index}">
@@ -7,9 +8,10 @@
           <p>售价:{{item.truePrice}}元</p>
         </li>
       </ul>
+      <p class="renote">国内电话：0.10元/分钟(不区分长途电话)</p>
       <div class="wxbtn" @click="gopay(1)">微信支付</div>
       <div class="zfbbtn" @click="gopay(2)">支付宝支付</div>
-      <p class="mo" ><span @click="gomrecord">充值记录?</span><span @click="goexp">资费查询?</span></p>
+      <p class="mo" ><span @click="gomrecord">充值记录</span><span @click="goexp">资费查询</span></p>
 
     </div>
   </div>
@@ -18,6 +20,7 @@
 <script>
   import {myalertpTwo} from '../../until/toolfn'
   import HTTP from '../../until/http'
+  import Goback from '@/goback'
     export default {
         name: '',
         data () {
@@ -27,15 +30,18 @@
               defauindex:0
             }
         },
+      components:{
+        Goback
+      },
       methods:{
         chosep(item,index){
           this.defauindex = index;
         },
         gomrecord(){
-          this.$router.push('/mrecord')
+          this.$router.push({path:'/mrecord',query:{sysver:this.sysver}})
         },
         goexp(){
-          this.$router.push('/exp')
+          this.$router.push({path:'/exp',query:{sysver:this.sysver}})
         },
         getlists(){
           let islogin = this.$local.fetch('xhtapelogin');
@@ -192,7 +198,9 @@
 
       },
       computed:{
-
+        sysver(){
+          return  this.$local.fetch('xhsysver').sysver
+        }
       },
       created(){
         this.getlists(); // 获取 价格 列表
@@ -206,7 +214,6 @@
   width: 100%;
   height: 100vh;
   background:#f1f1f1;
-  padding-top: 1rem;
   box-sizing: border-box;
   font-size: 0.45rem;
 }
@@ -216,7 +223,7 @@
 
 
 }
-.getlobox ul{padding-bottom: 1rem}
+.getlobox ul{}
 .getlobox ul li{
    width: 2.8rem;
    height: 2rem;
@@ -244,6 +251,7 @@
   color:#0069ff;
   padding-top: 0.1rem;
 }
+.renote{font-size: 0.35rem;line-height: 1.2rem;color: #7e7884;}
 .wxbtn{
   height: 1.2rem;
   background:#38ca3f;

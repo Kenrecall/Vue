@@ -16,6 +16,7 @@ import expenses from  '@/my/expenses'
 import set from  '@/my/set'
 import exp from  '@/my/exp'
 import problem from '@/my/problem'
+import server from '@/my/server'
 
 
 import login from '@/login/login'
@@ -128,6 +129,13 @@ let router = new Router({
       }
     },
     {
+      path:'/server',
+      component: server,
+      meta:{
+        title:'在线客服'
+      }
+    },
+    {
       path:'*',
       redirect:'/',
     }
@@ -151,11 +159,14 @@ router.beforeEach((to,from,next)=>{
 
     // myalertpTwo('app',false,'没有重定向直接跳转的地址'+ to.path);
     let islogin = to.meta.login;
+  console.log(to)
     let isloginxh = Vue.prototype.$local.fetch('xhtapelogin').mobile;
+    let sysver =    Vue.prototype.$local.fetch('xhsysver').sysver
     document.title = to.meta.title?to.meta.title:'通话录音';
     if(islogin && !isloginxh){ //表示还没有登录
-      next({path:'/login',query:{key:to.path.replace('/','')}})
+      next({path:'/login',query:{key:to.path.replace('/',''),sysver:sysver}})
     }else{
+      to.query.sysver ='test';
       next()
     }
 

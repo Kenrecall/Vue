@@ -1,5 +1,6 @@
 <template>
     <div class="problem">
+      <Goback title="常见问题"></Goback>
       <ul class="myproblem">
         <li class="prot"  @click="protfn(0)">
           <span >通话录音打电话消耗流量吗？</span>
@@ -15,7 +16,7 @@
           <span>可不可以不绑定手机号码？</span>
           <img src="../../assets/img/more.png" alt="" :class="{transf:currentindex== 2}">
         </li>
-        <li class="prode"  @click="prodefn()" v-if="currentindex== 2">不可以！【通话录音】采用的是双向回拨方式为你中转双方的电话，不绑定手机号码我们无法为你接通对方的电话，同时建议您将安装APP的手机号绑定到你的【通话录音】APP账户上。</li>
+        <li class="prode"  @click="prodefn()" v-if="currentindex== 2">不可以！【通话录音】采用的是双向回拨方式为你中转双方的电话，不绑定手机号码我们无法为你接通对方的电话，同时建议您将安装APP的手机号绑定到你的【通话录音】账户上。</li>
         <li class="prot"  @click="protfn(3)">
           <span>通话录音内容的安全性问题</span>
           <img src="../../assets/img/more.png" alt="" :class="{transf:currentindex== 3}">
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+  import Goback from '@/goback'
     export default {
         name: '',
         data () {
@@ -33,6 +35,9 @@
               msg: '',
               currentindex:-1
             }
+        },
+        components:{
+          Goback
         },
       methods:{
         protfn(index){

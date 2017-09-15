@@ -21,7 +21,7 @@ let local ={
     localStorage.setItem(key,JSON.stringify(value))
   },
   fetch(key){
-    return  JSON.parse( localStorage.getItem(key) ) || {}
+    return  JSON.parse( localStorage.getItem(key) ) || ''
   }
 }
 let checkphone =function (telNum){  // 可以不做插件 直接 定义为函数 做为方法使用

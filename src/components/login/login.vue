@@ -1,9 +1,6 @@
 <template>
   <div class="login">
-      <div class="lohead" style="display: none;">
-        登录
-        <img src="../../assets/img/back.png" alt="">
-      </div>
+    <Goback title="登录"></Goback>
     <input type="text" value="" placeholder="手机号" autocomplete="off"  v-model="phone">
     <input type="password" value="" placeholder="密码" autocomplete="off" v-model="psw">
     <p class="errmsg" v-if="errmsg"><img src="../../assets/img/err.png" alt="">{{errmsg}}</p>
@@ -17,6 +14,7 @@
 
 <script>
   import HTTP from '../../until/http'
+  import Goback from '@/goback'
   export default {
       name: '',
       data () {
@@ -27,14 +25,22 @@
             errmsg:''
           }
       },
+    components:{
+      Goback
+    },
+    computed:{
+      sysver(){
+        return  this.$local.fetch('xhsysver').sysver
+      }
+    },
     methods:{
       goreg(){ //注册
           let key = this.$route.query.key ? this.$route.query.key :'';
-          this.$router.replace({path:'/reg',query:{title:1,key:key}})
+          this.$router.replace({path:'/reg',query:{title:1,key:key,sysver:this.sysver}})
       },
       forreg(){ //忘记密码
         let key = this.$route.query.key ? this.$route.query.key :'';
-        this.$router.replace({path:'/reg',query:{title:2,key:key}})
+        this.$router.replace({path:'/reg',query:{title:2,key:key,sysver:this.sysver}})
       },
       gologin(){
 
@@ -88,7 +94,8 @@
               this.$local.save('xhtapelogin',loca); //存储本地登录状态
               let key = this.$route.query.key ? this.$route.query.key :'';
               console.log(key);
-              this.$router.replace('./'+key)
+              let  mkey = './'+key;
+              this.$router.replace({path:mkey,query:{sysver:this.sysver}})
             }else {
               this.errmsg =res.data.msg;
             }

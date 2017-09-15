@@ -29,9 +29,9 @@
   -webkit-overflow-scrolling: touch;
 }
 .noph{
-  padding:0.9rem 0.6rem ;
+  padding:0.9rem 1rem 0.9rem 1.3rem;
   color:#acb4c0;
-  font-size: 0.4rem;
+  font-size: 0.38rem;
   line-height: 0.6rem;
   font-family:PingFangSC-Regular;
   text-align: left;
@@ -124,6 +124,20 @@
   font-size: 0.35rem;
   color:#999999;
   line-height: 0.6rem;
+}
+.coreser{
+  position: absolute;
+  width: 2rem;
+  height: 0.8rem;
+  right: 1.1rem;
+  top:0.3rem;
+  font-size: 0.35rem;
+  color:#e48348;
+  line-height: 0.8rem;
+}
+.coreser img{
+  width: 0.8rem;
+  height: 0.8rem;
 }
 .callbtn {
 

@@ -1,6 +1,7 @@
 <template>
   <div class="tapede" id="tapede">
-      <div class="tapedebox">
+    <Goback title="录音详情"></Goback>
+    <div class="tapedebox">
         <div class="det">
           <img src="../../assets/img/ic_playert.png" alt="" class="deimg1">
           <p >拨打<span v-if="!ischangen">{{datas.voice_title}}</span><input type="text" value="" class="changen" v-show="ischangen" @blur="blurfname" v-model="datas.voice_title" ref="changenin" />的录音 <img src="../../assets/img/ed.png" alt="" @click="changename"></p>
@@ -50,6 +51,7 @@
 
   import {bindFn ,secondToMin,createTime,timefn ,minTime,myalertpTwo,isEmail} from '../../until/toolfn'
  import Alertt from '@/alertt'
+ import Goback from '@/goback'
   import HTTP from '../../until/http'
   export default {
     name: '',
@@ -83,7 +85,7 @@
       }
     },
     components:{
-      Alertt
+      Alertt,Goback
     },
     computed:{
       time1(){
@@ -96,6 +98,8 @@
           return createTime(this.atime);
       },
 
+
+
     },
     filters:{ // 过滤器
       note:function(value){
@@ -103,6 +107,9 @@
       }
     },
     methods:{
+      gobf(){
+          this.$router.go(-1); // 返回上一页
+      },
       changename(){
         this.ischangen =true;
         setTimeout(()=>{
@@ -170,6 +177,8 @@
         bindFn(this.$refs.myaudio,'ended',()=>{
            // alert(1) 成功监听 播放结束
           this.istop =true;
+          myaudio.currentTime =0;
+          this.currentTime =0;
           clearInterval(this.timer);
 
         })
@@ -476,6 +485,7 @@
   font-size: 0.36rem;
 
 }
+
 .det{
   height: 10rem;
   background-image:linear-gradient(-180deg, #0069ff 0%, #4691f6 100%);

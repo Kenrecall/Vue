@@ -1,5 +1,6 @@
 <template>
   <div id="exp">
+    <Goback title="资费详情"></Goback>
     <ul class="expul">
       <li><span>通话资费</span><span>{{price}}</span></li>
       <li><span>容量资费</span><span>{{price}}</span></li>
@@ -13,6 +14,7 @@
 <script>
   import {myalertpTwo} from '../../until/toolfn'
   import HTTP from '../../until/http'
+  import Goback from '@/goback'
     export default {
       name: '',
       data () {
@@ -20,6 +22,9 @@
             msg: '',
             price:''
           }
+      },
+      components:{
+        Goback
       },
       created(){
           let logindataall ={ // 有记录的所有通话
@@ -49,8 +54,7 @@
           HTTP.post('',logindataall)
             .then((res)=>{
               if(res.data.status ==1){
-                let msgarr =(res.data.data.systemInfo+'。').replace(/\。/g,'。<br>');
-                this.msg =msgarr;
+                this.msg =res.data.data.systemInfo;
                 this.price = res.data.data.basic.callPrice;
               }else {
                 // 账户 异地登录

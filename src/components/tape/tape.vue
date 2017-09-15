@@ -18,7 +18,7 @@
 
 <script>
   import HTTP from '../../until/http'
-  import {timefn} from '../../until/toolfn'
+  import {timefn,myalertpTwo} from '../../until/toolfn'
   export default {
     name: '',
     data () {
@@ -35,24 +35,67 @@
     },
     methods:{
       gotdetali(item,index){
-        this.$router.push({path:'/tapede',query:{id:index}})
+        this.$router.push({path:'/tapede',query:{id:index,sysver:this.sysver}})
       }
     },
     computed:{
-      tapedata(){
-        let  da = this.$store.state.dedata;
-        if(da && da.length != 0){
-          this.istape = true
-        }else {
-          this.istape = false;
-        }
-        console.log(this.istape)
-        console.log(da)
-        return  da;
+      sysver(){
+        return  this.$local.fetch('xhsysver').sysver
       }
     },
     created(){
-      this.$store.dispatch('getdatas',{page:1})
+      let logindata =this.$local.fetch('xhtapelogin');
+      let logindataall ={ // 有记录的所有通话
+        "number": "fy_call_record",
+        "sign": "9faf35d8e4a1647c083c6e2d299a2e30",
+        "param": {
+          "idfa": "15648A49-CCCD-4127-AC6F-B22AE1A9C38",
+          "imei": "",
+          "mac": "02:00:00:00:00:00",
+          "version": "1.0.1",
+          " versionCode": "1.0.1",
+          "jpushId ": "AkxiCETBhk6vxzyIfrIvDfJhPZbu4wqMYi9z3WQ8KELF",
+          "deviceToken ": "",
+          "cellnet": "1.0.1",
+          "sysver": this.$local.fetch('xhsysver').sysver,
+          "clientname ": " iPhone8,1 ",
+          "versionCode": "101",
+          "platform": "h5",
+          "password": '',
+          "inviteCode ": "3188",
+          "verifyCode": '',
+          " districtCode ": "86",
+          " district ": "中国",
+          "userId":logindata.user_id,
+          "mobile": '',
+          "fy_account":'',
+          "page":1,
+          "isRecord":1, // 1 是有录音的记录  0 表示默认 全部通话记录
+          "record_id":'',
+          "token":logindata.token// 登录时 返回的token
+        }
+      };
+      HTTP.post('',logindataall)
+        .then((res)=>{
+          console.log(res.data)
+          if(res.data.status ==1){
+            if(res.data.data.length !=0){
+              this.tapedata  =res.data.data;
+              this.istape = true
+              this.$store.commit('pulldedate',res.data.data)
+            }else {
+              this.istape = false;
+            }
+          }else {
+            // 账户 异地登录
+            myalertpTwo('app',false,res.data.msg,()=>{
+              this.$router.push({path:'/login',query:{key:'phone'}})
+            })
+          }
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
     }
 
   }
@@ -70,7 +113,7 @@
   background:#f1f1f1;
 }
 .ontape img{
-  width: 6rem;
+  width: 5rem;
   margin-top: 3rem;
 }
 .tapem{

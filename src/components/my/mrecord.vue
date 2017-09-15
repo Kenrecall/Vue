@@ -1,21 +1,25 @@
 <template>
   <div class="mrecord">
+    <Goback title="充值记录"></Goback>
     <ul>
       <li class="mrecordli" v-for="item in lists">
         <p><span>充值{{item.combo}}-{{mobile}}</span><span>{{ item.price_value}}</span></p>
         <p><span>{{ item.create_time | timefilter }}</span><span>充值成功</span></p>
       </li>
+
       <!--<li class="mrecordli">-->
         <!--<p><span>充值50元-13290060825</span><span>49.90</span></p>-->
         <!--<p><span>2017年7月12日</span><span>充值成功</span></p>-->
       <!--</li>-->
     </ul>
+    <!--<p style="font-size: 14px;">{{userAgent}}</p>-->
   </div>
 </template>
 
 <script>
   import {timefn} from '../../until/toolfn'
   import HTTP from '../../until/http'
+  import Goback from '@/goback'
   export default {
     name: '',
     data () {
@@ -23,6 +27,15 @@
         msg: '',
         lists:[],
         mobile:''
+      }
+    },
+    components:{
+      Goback
+    },
+    computed:{
+      userAgent(){
+        var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+        return userAgent
       }
     },
     methods:{
@@ -76,7 +89,7 @@
     },
     filters:{ // 过滤器
       timefilter:function(value){
-        return timefn(new Date( Number(value+'000'))).split(' ')[0];
+        return timefn(new Date( Number(value+'000')));
       }
     },
     created(){

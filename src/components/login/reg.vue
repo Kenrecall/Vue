@@ -1,6 +1,7 @@
 <template>
   <div class="reg">
-    <p >接受验证码的手机号：<span v-if="phone">+86 {{phone}}</span></p>
+    <Goback :title="ptitle"></Goback>
+    <p >接收验证码的手机号：<span v-if="phone">+86 {{phone}}</span></p>
     <div class="regbox">
       <input type="text" value="" placeholder="请输入手机号" v-model="phone" ref="pullp">
       <div class="getlobtn" @click="getlobtn">{{regname}}</div>
@@ -17,6 +18,7 @@
 <script>
 
   import HTTP from '../../until/http'
+  import Goback from '@/goback'
 
   export default {
     name: '',
@@ -30,9 +32,26 @@
           paw1:'',
           paw2:'',
           yanm:'',
-          title:''
+          title:'',
+
 
         }
+    },
+    components:{
+      Goback
+    },
+    computed:{
+      ptitle(){
+          if(this.title ==1){
+              return '注册'
+          }else if(this.title ==2){
+            return '忘记密码'
+          }else if(this.title ==3){
+            return '修改密码'
+          }
+
+
+      }
     },
     methods:{
       getlobtn(ev){

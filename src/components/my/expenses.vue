@@ -1,5 +1,6 @@
 <template>
   <div class="myexp">
+    <Goback title="历史账单"></Goback>
     <ul  v-if="istape">
       <li class="myexpli" v-for="item in lists">
         <p><span>呼叫号码：{{item.callee}}</span><span>{{ item.cost_money}}元</span></p>
@@ -13,14 +14,18 @@
 <script>
   import HTTP from '../../until/http'
   import {timefn} from '../../until/toolfn'
+  import Goback from '@/goback'
   export default {
     name: '',
     data () {
       return {
         msg: '',
-        istape:false
+        istape:true
       }
-  },
+    },
+    components:{
+      Goback
+    },
     methods:{
 
     },
@@ -37,6 +42,7 @@
         }else {
           this.istape = false;
         }
+        console.log(da)
         return  da;
       }
     },
@@ -53,7 +59,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .myexp{
-    padding-top: 0.4rem;
   }
   .myexp ul{
     border-top: 1px  solid #dedede;

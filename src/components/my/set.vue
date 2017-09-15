@@ -1,5 +1,6 @@
 <template>
     <div class="set">
+      <Goback title="设置"></Goback>
       <div class="myset" @click="setpsw">
         <span>修改密码</span>
         <img src="../../assets/img/more.png" alt="">
@@ -11,6 +12,7 @@
 </template>
 
 <script>
+  import Goback from '@/goback'
     export default {
         name: '',
         data () {
@@ -18,20 +20,28 @@
                 msg: ''
             }
         },
+      components:{
+        Goback
+      },
+      computed:{
+        sysver(){
+          return  this.$local.fetch('xhsysver').sysver
+        }
+      },
       methods:{
         setpsw(){
-          this.$router.push({path:'/reg',query:{title:3}})
+          this.$router.push({path:'/reg',query:{title:3,sysver:this.sysver}})
         },
         setout(){
           this.$local.save('xhtapelogin','')
-          this.$router.push('/phone')
+          this.$router.replace({path:'/phone',query:{sysver:this.sysver}})
 
         }
       },
       created(){
           let islogin =  this.$local.fetch('xhtapelogin').mobile;
           if(!islogin){
-              this.$router.replace({path:'/login',query:{key:'phone'}})
+              this.$router.replace({path:'/login',query:{key:'phone',sysver:this.sysver}})
           }
       }
     }
@@ -40,7 +50,6 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .set{
-    padding-top: 0.4rem;
   }
   .myset {
     width: 100%;
