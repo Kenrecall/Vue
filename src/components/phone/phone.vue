@@ -109,8 +109,6 @@
       return {
           msg: '',
         phone:'',
-        money:'0.00',// 账户余额
-        alldatas:'',
         ischecked:false,
         isknow:false,  //  关闭 我知道了弹层
         iscalling:false, //  关闭 正在呼叫弹层
@@ -361,7 +359,6 @@
               console.log(res.data)
               if(res.data.status ==1){
                 let loca= res.data.data;
-                this.money =loca.balance;
                 this.$local.save('xhtapelogin',loca); //存储本地登录状态
                 let isRegister =loca.isRegister;
                 this.getphonedatas(loca);// 获取页面数据
@@ -384,50 +381,6 @@
           this.nameerrmsg= '请输入正确的手机号码';
           this.$refs.pullp.focus()
         }
-      },
-      mymoney(){ // 实时获取 余额
-        let logindata =this.$local.fetch('xhtapelogin');
-        //  账户余额信息
-        let moneydata ={ // 有记录的所有通话
-          "number": "fy_userinfo",
-          "sign": "9faf35d8e4a1647c083c6e2d299a2e30",
-          "param": {
-            "idfa": "15648A49-CCCD-4127-AC6F-B22AE1A9C38",
-            "imei": "",
-            "mac": "02:00:00:00:00:00",
-            "version": "1.0.1",
-            " versionCode": "1.0.1",
-            "jpushId ": "AkxiCETBhk6vxzyIfrIvDfJhPZbu4wqMYi9z3WQ8KELF",
-            "deviceToken ": "",
-            "cellnet": "1.0.1",
-            "sysver": this.sysver,
-            "clientname ": " iPhone8,1 ",
-            "versionCode": "101",
-            "platform": "h5",
-            "password": '',
-            "inviteCode ": "3188",
-            "verifyCode": '',
-            " districtCode ": "86",
-            " district ": "中国",
-            "userId":logindata.user_id,
-            "mobile": '',
-            "fy_account":'',
-            "token":logindata.token// 登录时 返回的token
-          }
-        };
-        HTTP.post('',moneydata)
-          .then((res)=>{
-            console.log(res.data)
-            if(res.data.status ==1){
-              this.money =res.data.data.balance;
-
-            }else {
-              // 账户 异地登录
-            }
-          })
-          .catch((err)=>{
-            console.log(errr)
-          });
       },
       getphonedatas(logindata){
         let logindataall ={ // 有记录的所有通话
@@ -464,8 +417,9 @@
           .then((res)=>{
             console.log(res.data)
             if(res.data.status ==1){
-              this.alldatas =res.data.data;
-              console.log(this.alldatas)
+//              this.alldatas =res.data.data;
+              this.$store.commit('getalldatas',res.data.data)
+
             }else {
               // 账户 异地登录
               myalertpTwo('myphone',false,res.data.msg,()=>{
@@ -477,12 +431,10 @@
             console.log(errr)
           });
       }
-
-
     },
     computed:{
-      thephone(){
-
+      money(){
+        return this.$store.state.userdata ? this.$store.state.userdata.balance:"0.00"
       },
       swiper() {
         return this.$refs.mySwiper.swiper;
@@ -490,6 +442,12 @@
       sysver(){
         return  this.$local.fetch('xhsysver').sysver
       },
+      alldatas(){
+          let  data = this.$store.state.alldatas;
+          return data ? data:[]
+      }
+
+
 
     },
     filters:{ // 过滤器
@@ -514,10 +472,9 @@
     created(){
       let logindata =this.$local.fetch('xhtapelogin');
       if(logindata.mobile){// 已经登录
-//        this.money =logindata.balance;
         console.log('已经登录')
         this.getphonedatas(logindata);
-        this.mymoney();
+        this.$store.dispatch('mymoney')
       }else{// 没有登录
         this.islo= true;
       }
