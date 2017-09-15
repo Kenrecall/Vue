@@ -11,22 +11,26 @@
       </li>
     </ul>
     <ul class="myumo">
-      <router-link to="/recharge" tag="li">
+      <router-link :to="{path:'/recharge',query:{sysver:sysver}}" tag="li">
         <span >充值</span>
         <img src="../../assets/img/more.png" alt="">
       </router-link>
-      <router-link to="/expenses" tag="li">
+      <router-link :to="{path:'/expenses',query:{sysver:sysver}}" tag="li">
         <span>历史账单</span>
         <img src="../../assets/img/more.png" alt="">
       </router-link>
     </ul>
-    <ul class="myumo1">
-      <router-link to="/problem" tag="li">
+    <ul class="myumo">
+      <router-link :to="{path:'/problem',query:{sysver:sysver}}" tag="li">
         <span>常见问题</span>
         <img src="../../assets/img/more.png" alt="">
       </router-link>
+      <router-link :to="{path:'/server',query:{sysver:sysver}}" tag="li">
+        <span>在线客服</span>
+        <img src="../../assets/img/more.png" alt="">
+      </router-link>
     </ul>
-    <router-link to="/set" tag="div" class="myset">
+    <router-link :to="{path:'/set',query:{sysver:sysver}}" tag="div" class="myset">
       <span>设置</span>
       <img src="../../assets/img/more.png" alt="">
     </router-link>
@@ -41,7 +45,15 @@
       data () {
         return {
           msg: '',
-          userdata:''
+          userdata:{
+            balance:'0.00',
+            mobile:'18888888888'
+          }
+        }
+      },
+      computed:{
+        sysver(){
+          return  this.$local.fetch('xhsysver').sysver
         }
       },
       methods:{
