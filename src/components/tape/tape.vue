@@ -1,9 +1,9 @@
 <template>
   <div class="tape">
-      <div class="ontape" v-if="!istape">
+      <div class="ontape" v-if="!tapedata">
         <img src="../../assets/img/img_zwth.png" alt="">
       </div>
-    <ul class="tapem" v-if="istape">
+    <ul class="tapem" v-if="tapedata">
       <li v-for="(item ,index) in tapedata" @click="gotdetali(item,index)">
         <img src="../../assets/img/smphone.png" alt="" class="taimg1">
         <p>拨打 {{item.callee }} 的录音</p>
@@ -41,61 +41,16 @@
     computed:{
       sysver(){
         return  this.$local.fetch('xhsysver').sysver
+      },
+      tapedata(){
+        let  data =this.$store.state.dedata;
+        console.log(data)
+        return data
       }
     },
+
     created(){
-      let logindata =this.$local.fetch('xhtapelogin');
-      let logindataall ={ // 有记录的所有通话
-        "number": "fy_call_record",
-        "sign": "9faf35d8e4a1647c083c6e2d299a2e30",
-        "param": {
-          "idfa": "15648A49-CCCD-4127-AC6F-B22AE1A9C38",
-          "imei": "",
-          "mac": "02:00:00:00:00:00",
-          "version": "1.0.1",
-          " versionCode": "1.0.1",
-          "jpushId ": "AkxiCETBhk6vxzyIfrIvDfJhPZbu4wqMYi9z3WQ8KELF",
-          "deviceToken ": "",
-          "cellnet": "1.0.1",
-          "sysver": this.$local.fetch('xhsysver').sysver,
-          "clientname ": " iPhone8,1 ",
-          "versionCode": "101",
-          "platform": "h5",
-          "password": '',
-          "inviteCode ": "3188",
-          "verifyCode": '',
-          " districtCode ": "86",
-          " district ": "中国",
-          "userId":logindata.user_id,
-          "mobile": '',
-          "fy_account":'',
-          "page":1,
-          "isRecord":1, // 1 是有录音的记录  0 表示默认 全部通话记录
-          "record_id":'',
-          "token":logindata.token// 登录时 返回的token
-        }
-      };
-      HTTP.post('',logindataall)
-        .then((res)=>{
-          console.log(res.data)
-          if(res.data.status ==1){
-            if(res.data.data.length !=0){
-              this.tapedata  =res.data.data;
-              this.istape = true
-              this.$store.commit('pulldedate',res.data.data)
-            }else {
-              this.istape = false;
-            }
-          }else {
-            // 账户 异地登录
-            myalertpTwo('app',false,res.data.msg,()=>{
-              this.$router.push({path:'/login',query:{key:'phone'}})
-            })
-          }
-        })
-        .catch((err)=>{
-          console.log(err)
-        })
+      this.$store.dispatch("getdatas",{page:1})
     }
 
   }

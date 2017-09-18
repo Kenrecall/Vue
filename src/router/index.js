@@ -22,6 +22,9 @@ import server from '@/my/server'
 import login from '@/login/login'
 import reg from '@/login/reg'
 
+
+import contSingleList from '@/contSingleList'
+
 Vue.use(Router)
 import {myalertpTwo} from '../until/toolfn.js'
 let router = new Router({
@@ -133,6 +136,13 @@ let router = new Router({
       component: server,
       meta:{
         title:'在线客服'
+      }
+    },
+    {
+      path:'/contsingleList',
+      component:contSingleList,
+      mate:{
+        title:'测试下拉刷新'
       }
     },
     {

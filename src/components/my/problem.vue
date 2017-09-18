@@ -22,6 +22,10 @@
           <img src="../../assets/img/more.png" alt="" :class="{transf:currentindex== 3}">
         </li>
         <li class="prode"  @click="prodefn()" v-if="currentindex== 3">每位用户的通话录音文件均以加密的形式存储在阿里云服务器中，录音文件需要相应的动态秘钥进行解密方可正常播放，且解密秘钥有效时间为15分钟，保证了用户通话录音的隐私。</li>
+        <li class="prot"  @click="goref">
+          <span>测试下拉刷新</span>
+          <img src="../../assets/img/more.png" alt="" :class="{transf:currentindex== 3}">
+        </li>
       </ul>
     </div>
 </template>
@@ -50,6 +54,9 @@
         },
         prodefn(){
           this.currentindex =-1
+        },
+        goref(){
+            this.$router.push('/contsingleList')
         }
       }
     }

@@ -362,6 +362,7 @@
                 this.$local.save('xhtapelogin',loca); //存储本地登录状态
                 let isRegister =loca.isRegister;
                 this.getphonedatas(loca);// 获取页面数据
+                this.$store.commit('userdata',res.data.data)
                 console.log(isRegister)
                 if(isRegister ==1){ // 为新注册账号
                   this.isgo = true;

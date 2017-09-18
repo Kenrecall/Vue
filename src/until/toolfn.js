@@ -190,5 +190,7 @@ function myIphone(){  // 苹果手机
     return false
   }
 }
+
+
 //
 export {timefn ,bindFn,createTime ,secondToMin ,minTime ,myalertpTwo ,GetDateStrH ,isEmail,myBrowser,myIphone}
