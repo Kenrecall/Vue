@@ -58,7 +58,7 @@
       getList() {
         this.counter =1;//  刷新的时候 初始页为第一页了
         var response = [];
-        for(let i = 0; i < 20; i++) {
+        for(let i = 0; i < 3; i++) {
           response.push({
             date: "2017-06-1"+i,
             portfolio: "1.5195"+i,
@@ -77,25 +77,26 @@
       },
       onInfinite(done) {
         this.counter++;
-        let end = this.pageEnd = this.num * this.counter; // 10 * 2 20    10 * 3   30
-        let i = this.pageStart = this.pageEnd - this.num; // 20-10  10    30-10    20
-
-
-        for(i; i < end; i++) {
-          if(i >= 40) {
-            //走完数据调用方法
-            this.scrollData.noFlag = true;
-            break;
-          } else {
-            this.listdata.push({
-              date: "2017-06-1"+i,
-              portfolio: "1.5195"+i,
-              drop: i+"+.00 %" ,
-              state: 2
-            })
-
-          }
-        }
+        this.scrollData.noFlag = true;
+//        let end = this.pageEnd = this.num * this.counter; // 10 * 2 20    10 * 3   30
+//        let i = this.pageStart = this.pageEnd - this.num; // 20-10  10    30-10    20
+//
+//
+//        for(i; i < end; i++) {
+//          if(i >= 40) {
+//            //走完数据调用方法
+//            this.scrollData.noFlag = true;
+//            break;
+//          } else {
+//            this.listdata.push({
+//              date: "2017-06-1"+i,
+//              portfolio: "1.5195"+i,
+//              drop: i+"+.00 %" ,
+//              state: 2
+//            })
+//
+//          }
+//        }
         // 执行回调函数
         done();
       }

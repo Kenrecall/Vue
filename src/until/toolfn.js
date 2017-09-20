@@ -190,7 +190,22 @@ function myIphone(){  // 苹果手机
     return false
   }
 }
+function getValue(key) {  //  在地址栏中 通过key 获取value  ...html?key=3&lab=8  可以获取 key 和lab 的值
+  var str = window.location.search;
+  str = str.replace('?','');
+  var params = str.split('&');
+  var requests = {}, channel='';
+  for(var i =0; i < params.length; i++){
+    if(params[i].indexOf("=")){
+      var tmp = params[i].split("=");
+      requests[tmp[0]]= tmp[1];
+    }
+  }
+  // 返回 undefinde 说明没有对应的key
+  // 返回 '' 说明对应的值为空 但是有 key
+  return requests[key]
 
+}
 
 //
 export {timefn ,bindFn,createTime ,secondToMin ,minTime ,myalertpTwo ,GetDateStrH ,isEmail,myBrowser,myIphone}
